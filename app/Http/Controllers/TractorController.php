@@ -10,11 +10,6 @@ use Validator;
 class TractorController extends BaseController
 {
 
-
-// Auth::guard('api')->user(); // instance of the logged user
-// Auth::guard('api')->check(); // if a user is authenticated
-// Auth::guard('api')->id(); // the id of the authenticated user
-    
     /**
      * @SWG\Get(
      *   path="/tractors",
