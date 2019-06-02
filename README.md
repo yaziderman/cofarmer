@@ -14,31 +14,36 @@ To make it up and running on your machine, follow the steps:
 - Aquire the source code, either by cloning or the Download option.
 - Create a Database: Ex. cofarmer
 - Copy .env.example into a new file: .env and update the connectivity settings in it, as follows:
-
+```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=<Database Name>
 DB_USERNAME=<username>
 DB_PASSWORD=<password>
-
+```
 - Install the Required dependencies.
+```
 composer install
-
+```
 - Generate the App Key
+```
 php artisan key:generate 
-
+```
 - Migrate the DB
+```
 php artisan migrate
-
+```
 
 - Generate Some Testing Data (Optional):
+```
 php artisan db:seed --class=DatabaseSeeder
-
+```
 
 - Run a local server, which is the fastest way:
+```
 php artisan serve
-
+```
 - If everything worked well, you will be able to access the service documentation using the link:
 http://localhost:8000/api/documentation
 
