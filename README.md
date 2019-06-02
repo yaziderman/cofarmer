@@ -42,5 +42,6 @@ php artisan serve
 - If everything worked well, you will be able to access the service documentation using the link:
 http://localhost:8000/api/documentation
 
+You can now, create new users, login, manage the data and logout.
 
 Enjoy!

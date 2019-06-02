@@ -6,6 +6,7 @@ use App\Http\Controllers\Utilities\BaseController as BaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth; 
 
 class LoginController extends BaseController
 {
@@ -81,6 +82,18 @@ class LoginController extends BaseController
         return $this->sendFailedLoginResponse($request);
     }
 
+    /**
+     * @SWG\Post(
+     *   path="/logout",
+     *   summary="Logout",
+     *   tags={"Authorization"},
+     *   operationId="ApiV1Logout",
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     * )
+     *
+     */
     public function logout(Request $request)
     {
         $user = Auth::guard('api')->user();
