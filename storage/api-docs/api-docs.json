@@ -1,0 +1,728 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "CoFarmer Web Services Documentation",
+        "description": "Swagger documentation for the Main Web Services of the Backend infrastructure of the CoFarmer Project",
+        "contact": {
+            "email": "yazd.erman@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Login",
+                "operationId": "ApiV1Login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Valid Email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/fields": {
+            "get": {
+                "tags": [
+                    "Fields"
+                ],
+                "summary": "list fields",
+                "operationId": "ApiV1IndexField",
+                "responses": {
+                    "200": {
+                        "description": "A list with fields"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Fields"
+                ],
+                "summary": "Add Field",
+                "operationId": "ApiV1StoreUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crops_type",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "area",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/fields/{fieldId}": {
+            "get": {
+                "tags": [
+                    "Fields"
+                ],
+                "summary": "List field details",
+                "operationId": "ApiV1ShowField",
+                "parameters": [
+                    {
+                        "name": "fieldId",
+                        "in": "path",
+                        "description": "Target field",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Fields"
+                ],
+                "summary": "Update Field",
+                "operationId": "ApiV1UpdateField",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fieldId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crops_type",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "area",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Fields"
+                ],
+                "summary": "Delete Field",
+                "operationId": "ApiV1DeleteField",
+                "parameters": [
+                    {
+                        "name": "fieldId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Not Allowed"
+                    },
+                    "404": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/processes": {
+            "get": {
+                "tags": [
+                    "Processes"
+                ],
+                "summary": "list processes",
+                "operationId": "ApiV1IndexProcess",
+                "responses": {
+                    "200": {
+                        "description": "A list with processes"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Processes"
+                ],
+                "summary": "Add Process",
+                "operationId": "ApiV1StoreUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tractor_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "field_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "area",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "planned_date",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/processes/{processId}": {
+            "get": {
+                "tags": [
+                    "Processes"
+                ],
+                "summary": "List process details",
+                "operationId": "ApiV1ShowProcess",
+                "parameters": [
+                    {
+                        "name": "processId",
+                        "in": "path",
+                        "description": "Target process",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Processes"
+                ],
+                "summary": "Update Process",
+                "operationId": "ApiV1UpdateProcess",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "processId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tractor_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "field_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "area",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "planned_date",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Processes"
+                ],
+                "summary": "Delete Process",
+                "operationId": "ApiV1DeleteProcess",
+                "parameters": [
+                    {
+                        "name": "processId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Not Allowed"
+                    },
+                    "404": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/processes/{processId}/approve": {
+            "put": {
+                "tags": [
+                    "Processes"
+                ],
+                "summary": "Approve Process",
+                "operationId": "ApiV1ApproveProcess",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "processId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Not Allowed"
+                    },
+                    "208": {
+                        "description": "Already approved"
+                    },
+                    "503": {
+                        "description": "Not able to approve the process"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/report": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Basic Reporting Endpoint",
+                "operationId": "ApiV1ReportProcesses",
+                "parameters": [
+                    {
+                        "name": "with_tractor",
+                        "in": "query",
+                        "description": "Tractor Id to be filtered by",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "for_field",
+                        "in": "query",
+                        "description": "field ID to be filtered by",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "dated",
+                        "in": "query",
+                        "description": "List the processes which start with the provided date",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list with processes"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/smart-report": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Smart Reporting Endpoint, still under progress",
+                "operationId": "ApiV1ReportProcesses",
+                "parameters": [
+                    {
+                        "name": "includes[]",
+                        "in": "query",
+                        "description": "A list of entity types (separated by new lines) to filter the Returns: field and tractor",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list with processes"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/tractors": {
+            "get": {
+                "tags": [
+                    "Tractors"
+                ],
+                "summary": "list tractors",
+                "operationId": "ApiV1IndexTractor",
+                "responses": {
+                    "200": {
+                        "description": "A list with tractors"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Tractors"
+                ],
+                "summary": "Add Tractor",
+                "operationId": "ApiV1StoreUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crops_type",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "area",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/tractors/{tractorId}": {
+            "get": {
+                "tags": [
+                    "Tractors"
+                ],
+                "summary": "List tractor details",
+                "operationId": "ApiV1ShowTractor",
+                "parameters": [
+                    {
+                        "name": "tractorId",
+                        "in": "path",
+                        "description": "Target tractor",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Tractors"
+                ],
+                "summary": "Update Tractor",
+                "operationId": "ApiV1UpdateTractor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tractorId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crops_type",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "area",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Tractors"
+                ],
+                "summary": "Delete Tractor",
+                "operationId": "ApiV1DeleteTractor",
+                "parameters": [
+                    {
+                        "name": "tractorId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Not Allowed"
+                    },
+                    "404": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {},
+    "securityDefinitions": {
+        "default": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
