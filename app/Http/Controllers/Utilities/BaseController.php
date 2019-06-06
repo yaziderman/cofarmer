@@ -55,7 +55,8 @@ class BaseController extends Controller
             'message' => $error,
         ];
 
-
+      //  die("ssss");
+            
         if(!empty($errorMessages)){
             $response['data'] = $errorMessages;
         }

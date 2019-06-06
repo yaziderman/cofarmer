@@ -64,7 +64,12 @@ class User extends Authenticatable
 
     public function canUpdate($object)
     {
-        return $this->isAdmin() || $this->isOwner($object);   
+        // if ($this->isAdmin())
+        //     die("is not Admin");
+        // if (!$this->isOwner($object))
+        //     die("is not Owner");
+
+        return ($this->isAdmin() || $this->isOwner($object))? true : false;   
     }
 
     public function hasPermission($permission)

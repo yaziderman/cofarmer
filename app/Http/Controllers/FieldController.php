@@ -146,10 +146,12 @@ class FieldController extends BaseController
      */    
     public function update(FieldRequest $request, Fields $field)
     {
-        $this->canUserUpdate($field);
-
+        if (!$this->canUserUpdate($field)){
+             return $this->sendError('Not Allowed', 'You are not the owner of the field', 403);
+        }
+        
         $field->update($request->all());
-
+        
         return response()->json($field, 200);
     }
 
@@ -183,10 +185,13 @@ class FieldController extends BaseController
      */
     public function delete(Request $request, Fields $field)
     {
-        $this->canUserUpdate($field);
 
+        if (!$this->canUserUpdate($field)){
+             return $this->sendError('Not Allowed', 'You are not the owner of the field', 403);
+        }
+        
         try {
-         $field->delete();
+               $field->delete();
         } 
         catch (\Illuminate\Database\QueryException $e) {
             if($e->getCode() == "23000"){ //23000 is sql code for integrity constraint violation
@@ -200,7 +205,9 @@ class FieldController extends BaseController
 
     private function canUserUpdate($field){
         if (!Auth::guard('api')->user()->canUpdate($field)){
-            return $this->sendError('Not Allowed', 'You are not the owner of the field', 403);
+            return false;
         }
+
+        return true;
     }
 }
